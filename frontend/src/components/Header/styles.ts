@@ -5,7 +5,8 @@ export const Container = styled.header`
     display: flex;
     flex: 1;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    position: relative;
 
     padding: 15px;
 
@@ -22,7 +23,9 @@ export const MenuIconContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
+    position: absolute;
+    left: 1rem;
+    
     width: 50px;
     height: 50px;
 
