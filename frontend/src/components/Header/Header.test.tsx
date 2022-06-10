@@ -8,7 +8,7 @@ describe('Header component must render correctly', () => {
         const _menuIconAltText = iconMenuBurguerAltText;
         const _logoAltText = logoAltText;
         
-        render(<Header />);
+        render(<Header openMenu={() => {}}/>);
 
         expect(screen.getAllByAltText(_menuIconAltText)).toBeTruthy();
         expect(screen.getAllByAltText(_logoAltText)).toBeTruthy();
