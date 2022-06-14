@@ -5,9 +5,10 @@ export const Container = styled.header`
     display: flex;
     flex: 1;
     align-items: center;
-    justify-content: space-between;
-
+    justify-content: center;
     padding: 15px;
+
+    position: relative;
 
     background-color: ${theme.colors.primary.gray};
 `;
@@ -23,10 +24,14 @@ export const MenuIconContainer = styled.div`
     align-items: center;
     justify-content: center;
 
+    position: absolute;
+
     width: 50px;
     height: 50px;
 
     padding: 5px;
+
+    left: 1rem;
 
     border-radius: 100px;
 
