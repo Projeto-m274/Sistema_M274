@@ -55,7 +55,7 @@ const SignIn: React.FC = () => {
 
   return (
     <Fragment>
-      <Header />
+      <Header isAuthenticated={false} />
       <C.Container>
         <C.Title>Faça seu login</C.Title>
 
