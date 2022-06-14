@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import * as C from "./styles";
 
 import Logo from "../../assets/images/logo.svg";
@@ -7,16 +7,19 @@ import {
   iconMenuBurguerAltText,
   logoAltText,
 } from "../../constants/HeaderConstants";
+import { AppContext } from "../../contexts/AppContext";
 
-interface IHeaderProps {
-  openMenu: () => void;
-}
+const Header: React.FC = () => {
+  const { openMenu } = useContext(AppContext);
 
-const Header: React.FC<IHeaderProps> = ({ openMenu }) => {
   return (
     <C.Container>
       <C.MenuIconContainer>
-        <C.MenuIcon onClick={openMenu} src={IconMenuBurguer} alt={iconMenuBurguerAltText} />
+        <C.MenuIcon
+          onClick={openMenu}
+          src={IconMenuBurguer}
+          alt={iconMenuBurguerAltText}
+        />
       </C.MenuIconContainer>
       <C.Logo src={Logo} alt={logoAltText} />
     </C.Container>

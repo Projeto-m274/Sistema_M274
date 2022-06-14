@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as C from "./styles";
 import IconUser from "../../assets/icons/IconUser.svg";
 import IconCloseMenu from "../../assets/icons/IconCloseMenu.svg";
@@ -16,13 +16,12 @@ import {
   iconOccurrencesAltText,
   iconImmobileAltText,
 } from "../../constants/MenuContainerConstants";
+import { AppContext } from "../../contexts/AppContext";
 
-interface IMenuContainerProps {
-  menuIsOpen: boolean
-  closeMenu: () => void
-}
+const MenuContainer: React.FC = () => {
 
-const MenuContainer: React.FC<IMenuContainerProps> = ({menuIsOpen, closeMenu}) => {
+  const {menuIsOpen, closeMenu} = useContext(AppContext)
+
   return (
     <C.Container menuIsOpen={menuIsOpen}>
       <C.IconCloseMenu onClick={closeMenu} src={IconCloseMenu} alt={iconCloseMenuAltText} />

@@ -56,7 +56,7 @@ min-width: 300px;
 `
 
 export const NavContainer = styled.ul`
-min-width: 300px;
+  min-width: 300px;
 
   width: 100%;
   overflow: hidden;
