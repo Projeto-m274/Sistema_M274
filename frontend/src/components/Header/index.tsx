@@ -1,4 +1,4 @@
-import React, { memo, useContext } from "react";
+import React, { Fragment, memo, useContext } from "react";
 import * as C from "./styles";
 
 import Logo from "../../assets/images/logo.svg";
@@ -8,21 +8,32 @@ import {
   logoAltText,
 } from "../../constants/HeaderConstants";
 import { AppContext } from "../../contexts/AppContext";
+import MenuContainer from "../MenuContainer";
 
-const Header: React.FC = () => {
+type THeaderProps = {
+  isAuthenticated: boolean;
+}
+
+const Header: React.FC<THeaderProps> = ({ isAuthenticated }) => {
   const { openMenu } = useContext(AppContext);
 
   return (
-    <C.Container>
-      <C.MenuIconContainer>
-        <C.MenuIcon
-          onClick={openMenu}
-          src={IconMenuBurguer}
-          alt={iconMenuBurguerAltText}
-        />
-      </C.MenuIconContainer>
-      <C.Logo src={Logo} alt={logoAltText} />
-    </C.Container>
+    <Fragment>
+      <C.Container>
+        {isAuthenticated && (
+          <C.MenuIconContainer>
+            <C.MenuIcon
+              onClick={openMenu}
+              src={IconMenuBurguer}
+              alt={iconMenuBurguerAltText}
+            />
+          </C.MenuIconContainer>
+        )}
+        <C.Logo src={Logo} alt={logoAltText} />
+      </C.Container>
+
+      <MenuContainer />
+    </Fragment>
   );
 };
 

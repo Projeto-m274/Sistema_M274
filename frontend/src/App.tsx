@@ -1,6 +1,5 @@
 import React from "react";
 import { AppProvider } from "./contexts/AppContext";
-import { GlobalStyle } from "./theme/globalStyle";
 
 import { BrowserRouter } from 'react-router-dom';
 
