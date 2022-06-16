@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build": "[react] build --output dist"
+  }
+}
