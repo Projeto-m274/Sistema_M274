@@ -10,48 +10,34 @@ import * as C from './styles';
 const SignIn: React.FC = () => {
   const [mailValue, setMailValue] = useState<string>('');
   const [passwordValue, setPasswordValue] = useState<string>('');
-  const [isValidMail, setIsValidMail] = useState<boolean>(false);
-  const [isValidPassword, setIsValidPassword] = useState<boolean>(false);
   const [isSubmitForm, setIsSubmitForm] = useState<boolean>(false);
+  const [invalidCredentials, setInvalidCredentials] = useState<boolean>(false);
 
   const history = useHistory();
 
   useEffect(() => {
-    setIsValidMail(false);
-    setIsValidMail(false);
     setIsSubmitForm(false);
   }, []);
 
   const handleChangeMailValue = useCallback((email: string) => {
-    if (!email || email === ' ' || !email.includes('@') && !email.includes('.com')) {
-      setIsValidMail(false);
-      return;
-    } else {
       setMailValue(email);
-      setIsValidMail(true);
-    }
   }, []);
 
   const handleChangePasswordValue = useCallback((password: string) => {
-    if (!password || password === '') {
-      setIsValidPassword(false);
-      return;
-    } else {
       setPasswordValue(password);
-      setIsValidPassword(true);
-    }
   }, []);
 
   const handleSignIn = useCallback(() => {
     setIsSubmitForm(true);
 
-    if (!isValidMail || !isValidPassword) {
+    if (!mailValue || mailValue === '' || !passwordValue || passwordValue === '') {
       alert('Credenciais incorretas!');
+      setInvalidCredentials(true);
       return;
     } else {
       history.push('/Home');
     }
-  }, []);
+  }, [mailValue, passwordValue]);
 
   return (
     <Fragment>
@@ -66,7 +52,7 @@ const SignIn: React.FC = () => {
             value={mailValue}
             onChange={event => handleChangeMailValue(event.target.value)}
             htmlRequired
-            hasError={!isValidMail && isSubmitForm}
+            hasError={invalidCredentials && isSubmitForm}
           />
         </C.ColumnStart>
 
@@ -77,7 +63,7 @@ const SignIn: React.FC = () => {
             value={passwordValue}
             onChange={event => handleChangePasswordValue(event.target.value)}
             htmlRequired 
-            hasError={!isValidMail && isSubmitForm}
+            hasError={invalidCredentials && isSubmitForm}
           />
         </C.ColumnStart>
 
