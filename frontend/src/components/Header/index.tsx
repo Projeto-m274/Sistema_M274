@@ -1,4 +1,5 @@
 import React, { Fragment, memo, useContext } from "react";
+
 import * as C from "./styles";
 
 import Logo from "../../assets/images/logo.svg";
