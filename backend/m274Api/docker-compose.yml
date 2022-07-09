@@ -1,0 +1,32 @@
+version: '3.4'
+networks:
+  m274Api:
+    driver: bridge
+services:
+  M274Api:
+    image:  ${DOCKER_REGISTRY}m274api
+    build:
+      context: .
+      dockerfile: M274Api/Dockerfile
+    depends_on:
+      - postgres
+    networks:
+      - m274Api
+
+  postgres:
+    image: postgres
+    hostname: 'postgres'
+    environment:
+      POSTGRES_PASSWORD: "123456"
+    volumes:
+      - type: volume
+        source: m274Api
+        target: /var/lib/postgresql/data
+    ports:
+      - '15432:5432'    
+    expose:
+      - 15432
+    networks:
+      - m274Api
+volumes:
+  m274Api:
