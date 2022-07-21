@@ -126,4 +126,8 @@ scope.ServiceProvider.GetService<DataContext>().Database.Migrate();
 //Rodando sementes com dados necessario
 Seeds.CreateUserRoles(scope.ServiceProvider).Wait();
 
+Seeds.CreateRegiao(scope.ServiceProvider).Wait();
+
+Seeds.CreateEstados(scope.ServiceProvider).Wait();
+
 app.Run();
