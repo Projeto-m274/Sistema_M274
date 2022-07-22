@@ -132,4 +132,6 @@ Seeds.CreateEstados(scope.ServiceProvider).Wait();
 
 Seeds.CreateStatus(scope.ServiceProvider).Wait();
 
+Seeds.CreateTipoJuncao(scope.ServiceProvider).Wait();
+
 app.Run();

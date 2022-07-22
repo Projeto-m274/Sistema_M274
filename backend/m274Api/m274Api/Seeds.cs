@@ -286,5 +286,40 @@ namespace m274Api
                 await repositorioStatus.SaveChangesAsync();
             }
         }
+
+        public static async Task CreateTipoJuncao(IServiceProvider serviceProvider)
+        {
+            var repositorioTipoJuncao = serviceProvider.GetRequiredService<ITipoJuncaoRepository>();
+
+            if (!(await repositorioTipoJuncao.ListAllAsync()).Any())
+            {
+                repositorioTipoJuncao.Insert(new TipoJuncao
+                {
+                    NomeTipoJuncao = "CONCLUÍDO"
+                });
+
+                repositorioTipoJuncao.Insert(new TipoJuncao
+                {
+                    NomeTipoJuncao = "CANCELADA"
+                });
+
+                repositorioTipoJuncao.Insert(new TipoJuncao
+                {
+                    NomeTipoJuncao = "SOB ANÁLISE"
+                });
+
+                repositorioTipoJuncao.Insert(new TipoJuncao
+                {
+                    NomeTipoJuncao = "LIBERADA"
+                });
+
+                repositorioTipoJuncao.Insert(new TipoJuncao
+                {
+                    NomeTipoJuncao = "ENCERRADO"
+                });
+
+                await repositorioTipoJuncao.SaveChangesAsync();
+            }
+        }
     }
 }
