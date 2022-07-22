@@ -251,5 +251,40 @@ namespace m274Api
                 await repositorioEstado.SaveChangesAsync();
             }
         }
+
+        public static async Task CreateStatus(IServiceProvider serviceProvider)
+        {
+            var repositorioStatus = serviceProvider.GetRequiredService<IStatusRepository>();
+
+            if (!(await repositorioStatus.ListAllAsync()).Any())
+            {
+                repositorioStatus.Insert(new Status
+                {
+                    Descricao = "CONCLUÍDO"
+                });
+
+                repositorioStatus.Insert(new Status
+                {
+                    Descricao = "CANCELADO"
+                });
+
+                repositorioStatus.Insert(new Status
+                {
+                    Descricao = "A PROTOCOLAR"
+                });
+
+                repositorioStatus.Insert(new Status
+                {
+                    Descricao = "COMUNIQUE-SE"
+                });
+
+                repositorioStatus.Insert(new Status
+                {
+                    Descricao = "PROTOCOLADO"
+                });
+
+                await repositorioStatus.SaveChangesAsync();
+            }
+        }
     }
 }

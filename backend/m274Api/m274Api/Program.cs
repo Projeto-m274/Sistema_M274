@@ -130,4 +130,6 @@ Seeds.CreateRegiao(scope.ServiceProvider).Wait();
 
 Seeds.CreateEstados(scope.ServiceProvider).Wait();
 
+Seeds.CreateStatus(scope.ServiceProvider).Wait();
+
 app.Run();
