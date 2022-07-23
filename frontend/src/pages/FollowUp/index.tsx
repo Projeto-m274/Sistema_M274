@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import Checkbox from '../../components/Checkbox';
+import CustomTable from '../../components/CustomTable';
 import Dropdown, { IOptions } from '../../components/Dropdown';
 import { Row } from '../../components/Dropdown/styles';
 import Header from '../../components/Header';
+import { columns, data, options } from './tableData.mock';
 
 const FollowUp: React.FC = () => {
   const unitOptions: IOptions = {
@@ -20,7 +22,7 @@ const FollowUp: React.FC = () => {
       <Header isAuthenticated />
       <Row>
         <Dropdown 
-          isLeftSpacing={15} 
+          isLeftSpacing={6} 
           options={[unitOptions]}
         />
 
@@ -31,10 +33,10 @@ const FollowUp: React.FC = () => {
 
         <Checkbox 
           inputStyle={{ 
-            marginLeft: '8rem', 
+            marginLeft: '3rem', 
             marginTop: '8rem', 
             cursor: 'pointer',
-            height: '1rem' 
+            height: '2rem' 
           }} 
 
           labelStyle={{ 
@@ -46,6 +48,13 @@ const FollowUp: React.FC = () => {
           label='Concluído'
         />
       </Row>
+
+      <CustomTable 
+        title='FollowUp'
+        columns={columns}
+        data={data}
+        options={options}
+      />
     </Fragment>
   );
 }
