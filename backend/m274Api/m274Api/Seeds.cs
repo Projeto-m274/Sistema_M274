@@ -295,31 +295,57 @@ namespace m274Api
             {
                 repositorioTipoJuncao.Insert(new TipoJuncao
                 {
-                    NomeTipoJuncao = "CONCLUÍDO"
+                    NomeTipoJuncao = "PA"
                 });
 
                 repositorioTipoJuncao.Insert(new TipoJuncao
                 {
-                    NomeTipoJuncao = "CANCELADA"
+                    NomeTipoJuncao = "AGÊNCIA"
                 });
 
                 repositorioTipoJuncao.Insert(new TipoJuncao
                 {
-                    NomeTipoJuncao = "SOB ANÁLISE"
-                });
-
-                repositorioTipoJuncao.Insert(new TipoJuncao
-                {
-                    NomeTipoJuncao = "LIBERADA"
-                });
-
-                repositorioTipoJuncao.Insert(new TipoJuncao
-                {
-                    NomeTipoJuncao = "ENCERRADO"
+                    NomeTipoJuncao = "U.N."
                 });
 
                 await repositorioTipoJuncao.SaveChangesAsync();
             }
+        }
+
+        public static async Task CreateDemandaLiberada(IServiceProvider serviceProvider)
+        {
+            var repositorioDemandaLiberada = serviceProvider.GetRequiredService<IDemandaLiberadaRepository>();
+
+            if (!(await repositorioDemandaLiberada.ListAllAsync()).Any())
+            {
+                repositorioDemandaLiberada.Insert(new DemandaLiberada
+                {
+                    Descricao = "CONCLUÍDO"
+                });
+
+                repositorioDemandaLiberada.Insert(new DemandaLiberada
+                {
+                    Descricao = "CANCELADA"
+                });
+
+                repositorioDemandaLiberada.Insert(new DemandaLiberada
+                {
+                    Descricao = "SOB ANÁLISE"
+                });
+
+                repositorioDemandaLiberada.Insert(new DemandaLiberada
+                {
+                    Descricao = "LIBERADA"
+                });
+
+                repositorioDemandaLiberada.Insert(new DemandaLiberada
+                {
+                    Descricao = "ENCERRADO"
+                });
+
+                await repositorioDemandaLiberada.SaveChangesAsync();
+            }
+                
         }
     }
 }

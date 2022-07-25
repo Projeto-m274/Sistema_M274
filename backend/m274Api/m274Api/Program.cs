@@ -134,4 +134,6 @@ Seeds.CreateStatus(scope.ServiceProvider).Wait();
 
 Seeds.CreateTipoJuncao(scope.ServiceProvider).Wait();
 
+Seeds.CreateDemandaLiberada(scope.ServiceProvider).Wait();
+
 app.Run();
