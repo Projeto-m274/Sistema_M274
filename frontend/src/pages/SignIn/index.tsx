@@ -4,7 +4,7 @@ import { ToastContainerProps } from 'react-toastify';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 
-import Input from '../../components/Input';
+import Input from '../../components/Form/Input';
 
 import Toastr from '../../components/Toastr';
 import { ToastrDefaultProps } from '../../constants/toastrDefaultProps';
@@ -24,13 +24,13 @@ const SignIn: React.FC = () => {
     setIsSubmitForm(false);
   }, []);
 
-  const handleChangeMailValue = useCallback((email: string) => {
+  const handleChangeMailValue = (email: string) => {
     setMailValue(email);
-  }, []);
+  };
 
-  const handleChangePasswordValue = useCallback((password: string) => {
+  const handleChangePasswordValue = (password: string) => {
     setPasswordValue(password);
-  }, []);
+  };
 
   const handleSignIn = useCallback(() => {
     setIsSubmitForm(true);
@@ -56,28 +56,32 @@ const SignIn: React.FC = () => {
         <C.Title>Faça seu login</C.Title>
 
         <C.ColumnStart>
-          <C.Label>Email:</C.Label>
           <Input
+            label="E-mail"
             type='email'
             value={mailValue}
             onChange={event => handleChangeMailValue(event.target.value)}
-            htmlRequired
+            required
             hasError={invalidCredentials && isSubmitForm}
           />
         </C.ColumnStart>
 
         <C.ColumnStart>
-          <C.Label>Senha:</C.Label>
           <Input
+            label="Senha"
             type='password'
             value={passwordValue}
             onChange={event => handleChangePasswordValue(event.target.value)}
-            htmlRequired
+            required
             hasError={invalidCredentials && isSubmitForm}
           />
         </C.ColumnStart>
 
         <Button text='Entrar' onClick={handleSignIn} />
+
+        <C.AnchorLink to="/register">
+          Cadastre-se
+        </C.AnchorLink>
       </C.Container>
     </Fragment>
   );
