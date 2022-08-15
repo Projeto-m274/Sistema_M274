@@ -18,7 +18,7 @@ import {
 } from "../../constants/MenuContainerConstants";
 import { AppContext } from "../../contexts/AppContext";
 
-const MenuContainer: React.FC = () => {
+const SideMenu: React.FC = () => {
 
   const {menuIsOpen, closeMenu} = useContext(AppContext)
 
@@ -57,4 +57,4 @@ const MenuContainer: React.FC = () => {
   );
 };
 
-export default MenuContainer;
+export default SideMenu;
