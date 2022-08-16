@@ -2,6 +2,7 @@ import styled from "styled-components";
 import theme from "../../theme/theme";
 
 interface IDropdownStyles {
+  isTopSpacing?: number;
   isLeftSpacing?: number;
 }
 
@@ -27,5 +28,5 @@ export const Select = styled.select`
   cursor: pointer;
 
   margin-left: ${(props: IDropdownStyles) => props.isLeftSpacing || 0}rem;
-  margin-top: 8rem;
+  margin-top: ${(props: IDropdownStyles) => props.isTopSpacing || 0}rem;
 `

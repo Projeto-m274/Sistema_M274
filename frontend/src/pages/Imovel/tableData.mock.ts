@@ -27,7 +27,7 @@ export const data: Array<Object> = [
     dtTarefa: '21/04/2022', 
     dtLimite: '21/04/2022', 
     locale: 'Osasco - SP', 
-    codServObs: "10",
+    codServObs: "10", 
     descTarefa: "teste" 
   },
   { 
