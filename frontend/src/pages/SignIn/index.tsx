@@ -1,14 +1,14 @@
 import React, { memo, Fragment, useCallback, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ToastContainerProps } from 'react-toastify';
+
 import Button from '../../components/Button';
 import Header from '../../components/Header';
-
 import Input from '../../components/Form/Input';
-
 import Toastr from '../../components/Toastr';
-import { ToastrDefaultProps } from '../../constants/toastrDefaultProps';
+
 import { useToastr } from '../../hooks/useToastr';
+
+import { ToastrDefaultProps } from '../../constants/toastrDefaultProps';
 
 import * as C from './styles';
 
@@ -22,6 +22,10 @@ const SignIn: React.FC = () => {
 
   useEffect(() => {
     setIsSubmitForm(false);
+
+    if (localStorage.getItem("@registerSuccessful") === "true") {
+      useToastr("success", "Cadastro efetuado com sucesso!", "top-right");
+    }
   }, []);
 
   const handleChangeMailValue = (email: string) => {
@@ -60,9 +64,11 @@ const SignIn: React.FC = () => {
             label="E-mail"
             type='email'
             value={mailValue}
+            placeholder="Digite aqui o seu e-mail"
             onChange={event => handleChangeMailValue(event.target.value)}
             required
             hasError={invalidCredentials && isSubmitForm}
+            fullWidth
           />
         </C.ColumnStart>
 
@@ -71,9 +77,11 @@ const SignIn: React.FC = () => {
             label="Senha"
             type='password'
             value={passwordValue}
+            placeholder="Digite aqui a sua senha"
             onChange={event => handleChangePasswordValue(event.target.value)}
             required
             hasError={invalidCredentials && isSubmitForm}
+            fullWidth
           />
         </C.ColumnStart>
 
