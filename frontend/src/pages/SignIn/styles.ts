@@ -1,4 +1,6 @@
 import styled from "styled-components";
+
+import { Link } from "react-router-dom";
 import theme from "../../theme/theme";
 
 export const Container = styled.div`
@@ -25,4 +27,18 @@ export const ColumnStart = styled.div`
 
 export const Label = styled.p`
   margin-top: 3rem;
+`;
+
+export const AnchorLink = styled(Link)`
+  margin-top: 1rem;
+
+  color: ${theme.colors.primary.orange};
+
+  text-decoration: none;
+
+  transition: .2s;
+
+  &:hover {
+    opacity: .6;
+  }
 `;

@@ -9,7 +9,7 @@ import {
   logoAltText,
 } from "../../constants/HeaderConstants";
 import { AppContext } from "../../contexts/AppContext";
-import MenuContainer from "../MenuContainer";
+import SideMenu from "../SideMenu";
 
 type THeaderProps = {
   isAuthenticated: boolean;
@@ -33,7 +33,7 @@ const Header: React.FC<THeaderProps> = ({ isAuthenticated }) => {
         <C.Logo src={Logo} alt={logoAltText} />
       </C.Container>
 
-      <MenuContainer />
+      <SideMenu />
     </Fragment>
   );
 };

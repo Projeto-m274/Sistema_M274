@@ -31,7 +31,7 @@ const CustomTable: React.FC<ICustomTableProps> = ({
         ],
   
       }: {}}
-      style={{ margin: 90 }}
+      style={{ margin: "30px 90px" }}
     />
   );
 };
