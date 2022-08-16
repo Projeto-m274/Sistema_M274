@@ -13,6 +13,16 @@ const Imovel: React.FC = () => {
     value: "000.000.000-00",
   };
 
+  const multableColumn = columns.map((column, index) => {
+    return {
+      field: column.field,
+      title: column.title,
+      render: (rowData: any) => {
+        return <Checkbox/>
+      }
+    }
+  })
+
   return (
     <Fragment>
       <Header isAuthenticated />
@@ -39,7 +49,7 @@ const Imovel: React.FC = () => {
 
           <CustomTable
             title="Imovel"
-            columns={columns}
+            columns={multableColumn}
             data={data}
             options={options}
           />

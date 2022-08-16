@@ -3,10 +3,10 @@ import React, { memo } from 'react';
 import MaterialTable from '@material-table/core';
 import { ExportCsv, ExportPdf } from '@material-table/exporters';
 
-import { ICustomTableProps } from '../../models/ICustomTable';
-import Checkbox from '../Checkbox';
+import { ICustomTableProps } from '../../../models/ICustomTable';
+import Checkbox from '../../Checkbox';
 
-const CustomTable: React.FC<ICustomTableProps> = ({
+const CustomTableActions: React.FC<ICustomTableProps> = ({
   title,
   columns,
   data,
@@ -16,7 +16,7 @@ const CustomTable: React.FC<ICustomTableProps> = ({
     <MaterialTable
       title={title}
       columns={columns}
-      data={data}
+      data={data}z
       options={options?.exportData ? {
         exportMenu: [
           {
@@ -37,4 +37,4 @@ const CustomTable: React.FC<ICustomTableProps> = ({
   );
 };
 
-export default memo(CustomTable);
+export default memo(CustomTableActions);
