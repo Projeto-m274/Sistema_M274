@@ -16,7 +16,7 @@ const CustomTableActions: React.FC<ICustomTableProps> = ({
     <MaterialTable
       title={title}
       columns={columns}
-      data={data}z
+      data={data}
       options={options?.exportData ? {
         exportMenu: [
           {
