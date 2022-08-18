@@ -8,7 +8,7 @@ import {
   iconMenuBurguerAltText,
   logoAltText,
 } from "../../constants/HeaderConstants";
-import { AppContext } from "../../contexts/AppContext";
+import { MenuContext } from "../../contexts/menuContext";
 import SideMenu from "../SideMenu";
 
 type THeaderProps = {
@@ -16,7 +16,7 @@ type THeaderProps = {
 }
 
 const Header: React.FC<THeaderProps> = ({ isAuthenticated }) => {
-  const { openMenu } = useContext(AppContext);
+  const { openMenu } = useContext(MenuContext);
 
   return (
     <Fragment>

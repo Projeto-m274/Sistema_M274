@@ -1,22 +1,21 @@
 import React from "react";
-import { AppProvider } from "./contexts/AppContext";
 
 import { BrowserRouter } from 'react-router-dom';
 
 import Router from './routes';
 
 import { GlobalStyle } from './theme/globalStyle';
+import { GlobalContexts } from "./contexts";
 
 const App: React.FC = () => {
 
-
   return (
-    <AppProvider>
+    <GlobalContexts>
       <GlobalStyle />
       <BrowserRouter>
         <Router />
       </BrowserRouter>
-    </AppProvider>
+    </GlobalContexts>
   );
 };
 

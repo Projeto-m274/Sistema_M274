@@ -1,6 +1,7 @@
 import React, {
   Fragment,
   memo,
+  useContext,
   useState,
 } from "react";
 
@@ -14,23 +15,25 @@ import { useHistory } from "react-router-dom";
 import { useToastr } from "../../hooks/useToastr";
 import Toastr from "../../components/Toastr";
 import { ToastrDefaultProps } from "../../constants/toastrDefaultProps";
+import { UserContext } from "../../contexts/userContext";
 
 const Register: React.FC = () => {
   const [inputNameValue, setInputNameValue] = useState<string>("");
-  const [inputEmailValue, setInputEmailValue] = useState<string>("");
+  const [inputUsernameValue, setInputUsernameValue] = useState<string>("");
   const [inputPasswordValue, setInputPasswordValue] = useState<string>("");
   const [inputConfirmPasswordValue, setInputConfirmPasswordValue] = useState<string>("");
   const [invalidConfirmPasswordField, setInvalidConfirmPasswordField] = useState<boolean>(false);
   const [invalidFormFields, setInvalidFormFields] = useState<boolean>(false);
 
   const history = useHistory();
+  const { updateUser } = useContext(UserContext);
 
   const handleChangeInputNameValue = (name: string) => {
     setInputNameValue(name);
   };
 
-  const handleChangeInputEmailValue = (email: string) => {
-    setInputEmailValue(email);
+  const handleChangeInputUsernameValue = (email: string) => {
+    setInputUsernameValue(email);
   };
 
   const handleChangeInputPasswordValue = (password: string) => {
@@ -44,7 +47,7 @@ const Register: React.FC = () => {
   const passwordsNotMatch = () => inputPasswordValue !== inputConfirmPasswordValue;
 
   const formValidator = () => {
-    const fields = [inputNameValue, inputEmailValue, inputPasswordValue, inputConfirmPasswordValue];
+    const fields = [inputNameValue, inputUsernameValue, inputPasswordValue, inputConfirmPasswordValue];
 
     const hasInvalidFields = fields.filter(field => !field || field === "");
 
@@ -63,9 +66,16 @@ const Register: React.FC = () => {
   const handleSubmitForm = () => {
     formValidator();
 
-    localStorage.setItem("@registerSuccessful", "true");
+    if (!invalidFormFields && !invalidConfirmPasswordField) {
+      updateUser({
+        fullName: inputNameValue,
+        username: inputUsernameValue,
+      });
+      
+      localStorage.setItem("@registerSuccessful", "true");
 
-    if (!invalidFormFields && !invalidConfirmPasswordField) history.push("/");
+      history.push("/");
+    }
   }
 
   return (
@@ -94,11 +104,11 @@ const Register: React.FC = () => {
           />
 
           <Input
-            label="Seu e-mail:"
-            type="email"
-            value={inputEmailValue}
-            placeholder="Digite aqui o seu e-mail"
-            onChange={event => handleChangeInputEmailValue(event.target.value)}
+            label="Seu nome de usuário:"
+            type="text"
+            value={inputUsernameValue}
+            placeholder="Digite aqui o seu nome de usuário"
+            onChange={event => handleChangeInputUsernameValue(event.target.value)}
             required
             hasError={invalidFormFields}
             fullWidth

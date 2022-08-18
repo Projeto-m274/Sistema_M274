@@ -1,18 +1,16 @@
 import React, { createContext, useCallback, useState } from "react";
 
-interface IProps {
-  children: React.ReactNode;
-}
+import { IReactComponent } from "../models/ReactComponent";
 
-interface IAppContextProps {
+interface IMenuContextData {
   menuIsOpen: boolean;
   openMenu: () => void;
   closeMenu: () => void;
 }
 
-export const AppContext = createContext<IAppContextProps>({} as IAppContextProps);
+export const MenuContext = createContext<IMenuContextData>({} as IMenuContextData);
 
-export const AppProvider: React.FC<IProps> = ({ children }) => {
+export const MenuProvider: React.FC<IReactComponent> = ({ children }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const openMenu = useCallback(() => {
@@ -24,8 +22,8 @@ export const AppProvider: React.FC<IProps> = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ menuIsOpen, openMenu, closeMenu }}>
+    <MenuContext.Provider value={{ menuIsOpen, openMenu, closeMenu }}>
       {children}
-    </AppContext.Provider>
+    </MenuContext.Provider>
   );
 };

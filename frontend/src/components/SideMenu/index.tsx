@@ -16,11 +16,11 @@ import {
   iconOccurrencesAltText,
   iconImmobileAltText,
 } from "../../constants/MenuContainerConstants";
-import { AppContext } from "../../contexts/AppContext";
+import { MenuContext } from "../../contexts/menuContext";
 
 const SideMenu: React.FC = () => {
 
-  const {menuIsOpen, closeMenu} = useContext(AppContext)
+  const {menuIsOpen, closeMenu} = useContext(MenuContext)
 
   return (
     <C.Container menuIsOpen={menuIsOpen}>

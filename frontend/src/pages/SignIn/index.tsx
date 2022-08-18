@@ -1,4 +1,4 @@
-import React, { memo, Fragment, useCallback, useState, useEffect } from 'react';
+import React, { memo, Fragment, useCallback, useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Button from '../../components/Button';
@@ -6,9 +6,12 @@ import Header from '../../components/Header';
 import Input from '../../components/Form/Input';
 import Toastr from '../../components/Toastr';
 
+import { UserContext } from '../../contexts/userContext';
+
 import { useToastr } from '../../hooks/useToastr';
 
 import { ToastrDefaultProps } from '../../constants/toastrDefaultProps';
+
 
 import * as C from './styles';
 
@@ -19,6 +22,7 @@ const SignIn: React.FC = () => {
   const [invalidCredentials, setInvalidCredentials] = useState<boolean>(false);
 
   const history = useHistory();
+  const { userLoggedIn, userLogin } = useContext(UserContext);
 
   useEffect(() => {
     setIsSubmitForm(false);
@@ -46,7 +50,11 @@ const SignIn: React.FC = () => {
 
       return;
     } else {
-      history.push('/follow-up');
+      userLogin(mailValue, passwordValue);
+
+      if (userLoggedIn) {
+        history.push('/follow-up');
+      }
     }
   }, [mailValue, passwordValue]);
 
