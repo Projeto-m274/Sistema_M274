@@ -8,6 +8,7 @@ export const Container = styled.div<FlexBoxModel>`
   flex-direction: ${(props: FlexBoxModel) => props?.flexDirection || "row"};
   align-items: ${(props: FlexBoxModel) => props?.alignItems || "center"};
   justify-content: ${(props: FlexBoxModel) => props?.justifyContent || "center"};
+  gap: ${(props: FlexBoxModel) => props?.gap || 0}px;
 
   width: ${(props: FlexBoxModel) => props?.fullWidth && "100%"};
 `;

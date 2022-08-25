@@ -10,9 +10,6 @@ import { UserContext } from '../../contexts/userContext';
 
 import { useToastr } from '../../hooks/useToastr';
 
-import { ToastrDefaultProps } from '../../constants/toastrDefaultProps';
-
-
 import * as C from './styles';
 
 const SignIn: React.FC = () => {
@@ -22,14 +19,10 @@ const SignIn: React.FC = () => {
   const [invalidCredentials, setInvalidCredentials] = useState<boolean>(false);
 
   const history = useHistory();
-  const { userLoggedIn, userLogin } = useContext(UserContext);
+  const { userLogin } = useContext(UserContext);
 
   useEffect(() => {
     setIsSubmitForm(false);
-
-    if (localStorage.getItem("@registerSuccessful") === "true") {
-      useToastr("success", "Cadastro efetuado com sucesso!", "top-right");
-    }
   }, []);
 
   const handleChangeMailValue = (email: string) => {
@@ -52,7 +45,9 @@ const SignIn: React.FC = () => {
     } else {
       userLogin(mailValue, passwordValue);
 
-      if (userLoggedIn) {
+      const userIsLoggedIn = localStorage.getItem("@UserLogged") === "true";
+
+      if (userIsLoggedIn) {
         history.push('/follow-up');
       }
     }
@@ -60,8 +55,6 @@ const SignIn: React.FC = () => {
 
   return (
     <Fragment>
-      <Toastr {...ToastrDefaultProps} />
-
       <Header isAuthenticated={false} />
 
       <C.Container>
@@ -94,10 +87,6 @@ const SignIn: React.FC = () => {
         </C.ColumnStart>
 
         <Button text='Entrar' onClick={handleSignIn} />
-
-        <C.AnchorLink to="/register">
-          Cadastre-se
-        </C.AnchorLink>
       </C.Container>
     </Fragment>
   );

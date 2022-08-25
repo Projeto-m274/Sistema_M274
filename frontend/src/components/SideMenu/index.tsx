@@ -1,56 +1,85 @@
-import React, { useContext } from "react";
-import * as C from "./styles";
-import IconUser from "../../assets/icons/IconUser.svg";
-import IconCloseMenu from "../../assets/icons/IconCloseMenu.svg";
-import IconHome from "../../assets/icons/IconHome.svg";
-import IconMyAccount from "../../assets/icons/IconMyAccount.svg";
-import IconFollowUp from "../../assets/icons/IconFollowUp.svg";
-import IconOccurrence from "../../assets/icons/IconOccurrence.svg";
-import IconImmobile from "../../assets/icons/IconImmobile.svg";
-import {
-  iconCloseMenuAltText,
-  iconUserAltText,
-  iconHomeAltText,
-  iconMyAccountAltText,
-  iconFollowUpAltText,
-  iconOccurrencesAltText,
-  iconImmobileAltText,
-} from "../../constants/MenuContainerConstants";
+import React, { useContext, useMemo } from "react";
+
+import { useHistory } from "react-router-dom";
+import { 
+  MdAccountCircle,
+  MdHome, 
+  MdManageAccounts,
+  MdLogout,
+  MdGroupAdd, 
+  MdArrowCircleUp,
+  MdError,
+  MdHouse,
+} from "react-icons/md";
+
 import { MenuContext } from "../../contexts/menuContext";
+import { UserContext } from "../../contexts/userContext";
+
+import * as C from "./styles";
 
 const SideMenu: React.FC = () => {
 
-  const {menuIsOpen, closeMenu} = useContext(MenuContext)
+  const { menuIsOpen, closeMenu } = useContext(MenuContext);
+  const { userLogout, userData } = useContext(UserContext);
+
+  const history = useHistory();
+
+  const handleSignOut = () => {
+    closeMenu();
+    userLogout();
+    history.push("/");
+  }
+
+  const handleToRoute = (pathname: string) => {
+    closeMenu();
+    history.push(pathname);
+  }
+
+  const user = useMemo(() => {
+    return userData?.usuario?.nome || "usuário";
+  }, [userData]);
 
   return (
     <C.Container menuIsOpen={menuIsOpen}>
-      <C.IconCloseMenu onClick={closeMenu} src={IconCloseMenu} alt={iconCloseMenuAltText} />
+      <C.IconCloseMenu 
+        size={28}
+        color="#fff"
+        onClick={closeMenu} 
+      />
 
       <C.ContainerUserLogged>
-        <img src={IconUser} alt={iconUserAltText} />
-        <h1>Seja bem vindo(a) Mirian Teles</h1>
+        <MdAccountCircle size={38} color="#fff" />
+        <h1>Seja bem vindo(a) {user}</h1>
       </C.ContainerUserLogged>
 
       <C.NavContainer>
         <C.ItemNav className="home">
-          <img src={IconHome} alt={iconHomeAltText} />
+          <MdHome size={28} color="#fff" />
           <span>Inicio</span>
         </C.ItemNav>
-        <C.ItemNav className="myAccount">
-          <img src={IconMyAccount} alt={iconMyAccountAltText} />
+        <C.ItemNav className="myAccount" onClick={() => handleToRoute("/my-account")}>
+          <MdManageAccounts size={28} color="#fff" />
           <span>Minha conta</span>
         </C.ItemNav>
+        <C.ItemNav className="registerUser" onClick={() => handleToRoute("/register")}>
+          <MdGroupAdd size={28} color="#fff" />
+          <span>Cadastrar usuário</span>
+        </C.ItemNav>
         <C.ItemNav className="followUp">
-          <img src={IconFollowUp} alt={iconFollowUpAltText} />
+          <MdArrowCircleUp size={28} color="#fff" />
           <span>Follow up</span>
         </C.ItemNav>
         <C.ItemNav className="occurrence">
-          <img src={IconOccurrence} alt={iconOccurrencesAltText} />
+          <MdError size={28} color="#fff" />
           <span>Ocorrências</span>
         </C.ItemNav>
         <C.ItemNav className="immobile">
-          <img src={IconImmobile} alt={iconImmobileAltText} />
+          <MdHouse size={28} color="#fff" />
           <span>Imóveis</span>
+        </C.ItemNav>
+        <C.ItemNav className="signOut" onClick={handleSignOut}>
+          <MdLogout color="#fff" size={28} />
+          <span>Sair</span>
         </C.ItemNav>
       </C.NavContainer>
     </C.Container>

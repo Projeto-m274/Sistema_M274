@@ -1,25 +1,25 @@
-import { AxiosError, AxiosResponse } from "axios";
 import React, { createContext, useState } from "react";
 
+import { AxiosError, AxiosResponse } from "axios";
+
 import { IReactComponent } from "../models/ReactComponent";
-import { IUser } from "../models/User";
+import { IUser, IUserResponse } from "../models/User";
+
 import api from "../services/api";
 
 interface IUserContextData {
-  userData: IUser | undefined;
+  userData: IUserResponse | undefined;
   userLogin: (username: string, password: string) => void;
+  userLogout: () => void;
   createUser: (userData: IUser) => void;
-  updateUser: (userData: IUser) => void;
   userCreated: boolean;
-  userLoggedIn: boolean;
 };
 
 export const UserContext = createContext<IUserContextData>({} as IUserContextData);
 
 export const UserProvider: React.FC<IReactComponent> = ({ children }) => {
-  const [userData, setUserData] = useState<IUser>();
+  const [userData, setUserData] = useState<IUserResponse>();
   const [userCreated, setUserCreated] = useState<boolean>(false);
-  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
 
   const userLogin = async (username: string, password: string) => {
     const loginUserRequestParameter = {
@@ -28,13 +28,18 @@ export const UserProvider: React.FC<IReactComponent> = ({ children }) => {
     }
 
     await api.post("/Account/login", loginUserRequestParameter)
-      .then(() => {
-        setUserLoggedIn(true);
+      .then((response: AxiosResponse<IUserResponse>) => {
+        localStorage.setItem("@UserLogged", "true");
+        setUserData(response?.data)
       }).catch((error: AxiosError) => {
         console.error(error);
-        setUserLoggedIn(false);
+        localStorage.setItem("@UserLogged", "false");
       });
   };
+
+  const userLogout = () => {
+    localStorage.removeItem("@UserLogged");
+  }
 
   const createUser = async (userData: IUser) => {
     const createUserRequestParameter: IUser = {
@@ -53,18 +58,13 @@ export const UserProvider: React.FC<IReactComponent> = ({ children }) => {
     });
   }
 
-  const updateUser = (userData: IUser) => {
-    setUserData(userData);
-  };
-
   return (
     <UserContext.Provider value={{ 
       userData, 
       userLogin,
+      userLogout,
       createUser, 
-      updateUser, 
       userCreated,
-      userLoggedIn, 
     }}>
       {children}
     </UserContext.Provider>

@@ -1,3 +1,4 @@
+import { MdClose } from "react-icons/md";
 import styled from "styled-components";
 import theme from "../../theme/theme";
 
@@ -15,6 +16,9 @@ export const Container = styled.div<IProps>`
   overflow: hidden;
   
   position: fixed;
+
+  z-index: 1;
+
   top: 0;
   left: 0;
 
@@ -23,7 +27,7 @@ export const Container = styled.div<IProps>`
   border: 1px solid ${theme.colors.primary.orange};
 `
 
-export const IconCloseMenu = styled.img`
+export const IconCloseMenu = styled(MdClose)`
   position: absolute;
   top: 1rem;
   right: 1rem;

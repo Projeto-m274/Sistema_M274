@@ -11,6 +11,7 @@ const Flexbox: React.FC<FlexBoxModel & FlexBoxProps> = ({
   flexDirection,
   alignItems,
   justifyContent,
+  gap,
   fullWidth,
   children,
 }) => {
@@ -20,6 +21,7 @@ const Flexbox: React.FC<FlexBoxModel & FlexBoxProps> = ({
       flexDirection={flexDirection}
       alignItems={alignItems}
       justifyContent={justifyContent}
+      gap={gap}
       fullWidth={fullWidth}
     >
       {children}

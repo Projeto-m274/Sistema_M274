@@ -11,6 +11,7 @@ export interface FlexBoxModel {
   flexDirection?: "column" | "row";
   alignItems?: FlexBoxJustifyAndAlignments;
   justifyContent?: FlexBoxJustifyAndAlignments;
+  gap?: number;
 
   fullWidth?: boolean;
 }
