@@ -26,6 +26,7 @@ const Register: React.FC = () => {
   const [inputConfirmPasswordValue, setInputConfirmPasswordValue] = useState<string>("");
   const [invalidConfirmPasswordField, setInvalidConfirmPasswordField] = useState<boolean>(false);
   const [invalidFormFields, setInvalidFormFields] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const history = useHistory();
 
@@ -53,10 +54,10 @@ const Register: React.FC = () => {
 
   const formValidator = () => {
     const fields = [
-      inputNameValue, 
+      inputNameValue,
       inputUsernameValue,
       inputEmailValue,
-      inputPasswordValue, 
+      inputPasswordValue,
       inputConfirmPasswordValue,
     ];
 
@@ -64,26 +65,36 @@ const Register: React.FC = () => {
 
     if (hasInvalidFields.length > 0) {
       useToastr("error", "Preencha todos os campos do formulário corretamente!", "top-right");
-      setInvalidFormFields(true);
+      localStorage.setItem("invalidRegisterForm", "true");
       return;
     } else if (passwordsNotMatch()) {
       useToastr("error", "As senhas não conferem! Tente novamente.", "top-right");
-      setInvalidConfirmPasswordField(true);
+      localStorage.setItem("passwordsNotMatch", "true");
       return;
     } else {
-      setInvalidFormFields(false);
-      setInvalidConfirmPasswordField(false);
+      localStorage.setItem("invalidRegisterForm", "true");
     }
   }
 
   const handleSubmitForm = () => {
+    setIsLoading(true);
+
     formValidator();
 
-    if (!invalidFormFields && !invalidConfirmPasswordField) {
-      localStorage.setItem("@registerSuccessful", "true");
+    if (localStorage.getItem("invalidRegisterForm") !== "true" && localStorage.getItem("passwordsNotMatch") !== "true") {
+      setTimeout(() => {
+        localStorage.setItem("@registerSuccessful", "true");
+        
+        history.push("/follow-up");
 
-      history.push("/follow-up");
+        setIsLoading(false);
+      }, 2000);
     }
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000)
+
   }
 
   return (
@@ -107,7 +118,7 @@ const Register: React.FC = () => {
             placeholder="Digite aqui o seu nome completo"
             onChange={event => handleChangeInputNameValue(event.target.value)}
             required
-            hasError={invalidFormFields}
+            hasError={localStorage.getItem("invalidRegisterForm") === "true"}
             fullWidth
           />
 
@@ -118,7 +129,7 @@ const Register: React.FC = () => {
             placeholder="Digite aqui o seu nome de usuário"
             onChange={event => handleChangeInputUsernameValue(event.target.value)}
             required
-            hasError={invalidFormFields}
+            hasError={localStorage.getItem("invalidRegisterForm") === "true"}
             fullWidth
           />
 
@@ -129,7 +140,7 @@ const Register: React.FC = () => {
             placeholder="Digite aqui o seu melhor e-mail"
             onChange={event => handleChangeInputEmailValue(event.target.value)}
             required
-            hasError={invalidFormFields}
+            hasError={localStorage.getItem("invalidRegisterForm") === "true"}
             fullWidth
           />
 
@@ -140,7 +151,7 @@ const Register: React.FC = () => {
             placeholder="Digite aqui a sua senha"
             onChange={event => handleChangeInputPasswordValue(event.target.value)}
             required
-            hasError={invalidFormFields || invalidConfirmPasswordField}
+            hasError={localStorage.getItem("invalidRegisterForm") === "true" || localStorage.getItem("passwordsNotMatch") === "true"}
             fullWidth
           />
 
@@ -151,12 +162,13 @@ const Register: React.FC = () => {
             placeholder="Confirme aqui a senha digitada acima"
             onChange={event => handleChangeInputConfirmPasswordValue(event.target.value)}
             required
-            hasError={invalidFormFields || invalidConfirmPasswordField}
+            hasError={localStorage.getItem("invalidRegisterForm") === "true" || localStorage.getItem("passwordsNotMatch") === "true"}
             fullWidth
           />
 
           <Button
             text="Finalizar o meu cadastro"
+            isLoading={isLoading}
             onClick={handleSubmitForm}
           />
         </Flexbox>
