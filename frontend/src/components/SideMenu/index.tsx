@@ -65,11 +65,11 @@ const SideMenu: React.FC = () => {
           <MdGroupAdd size={28} color="#fff" />
           <span>Cadastrar usuário</span>
         </C.ItemNav>
-        <C.ItemNav className="followUp">
+        <C.ItemNav className="followUp" onClick={() => handleToRoute("/follow-up")}>
           <MdArrowCircleUp size={28} color="#fff" />
           <span>Follow up</span>
         </C.ItemNav>
-        <C.ItemNav className="occurrence">
+        <C.ItemNav className="occurrence" onClick={() => handleToRoute("/404")}>
           <MdError size={28} color="#fff" />
           <span>Ocorrências</span>
         </C.ItemNav>

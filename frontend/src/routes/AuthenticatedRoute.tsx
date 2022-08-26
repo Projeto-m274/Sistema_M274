@@ -23,7 +23,7 @@ const AuthenticatedRoute: React.FC<AuthenticatedRouteProps> = ({
         ) : (
           <Redirect to={{ 
             pathname: isPrivate 
-            ? "/" 
+            ? "/404"
             : "/follow-up"
           }} />
         )

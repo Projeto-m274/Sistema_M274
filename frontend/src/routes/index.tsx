@@ -8,6 +8,7 @@ import Imovel from "../pages/Imovel";
 import Register from "../pages/Register";
 import MyAccount from "../pages/MyAccount";
 import AuthenticatedRoute from "./AuthenticatedRoute";
+import NotFound from "../pages/NotFound";
 
 const Router: React.FC = () => {
   return (
@@ -40,6 +41,11 @@ const Router: React.FC = () => {
         path="/register" 
         component={Register} 
         isPrivate
+      />
+
+      <AuthenticatedRoute 
+        path="/404"
+        component={NotFound}
       />
     </Switch>
   );

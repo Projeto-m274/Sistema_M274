@@ -3,8 +3,8 @@ import styled from "styled-components";
 import theme from "../../theme/theme";
 
 interface IProps {
-  menuIsOpen: boolean
-}
+  menuIsOpen: boolean;
+};
 
 export const Container = styled.div<IProps>`
   height: 100vh;
@@ -23,9 +23,11 @@ export const Container = styled.div<IProps>`
   left: 0;
 
   background-color: ${theme.colors.primary.gray};
+  
+  border-right: 1px solid ${props => props.menuIsOpen && theme.colors.primary.white};
 
-  border: 1px solid ${theme.colors.primary.orange};
-`
+  box-shadow: 2px 2px 2px 2px ${props => props.menuIsOpen && theme.colors.primary.gray};
+`;
 
 export const IconCloseMenu = styled(MdClose)`
   position: absolute;
@@ -33,7 +35,7 @@ export const IconCloseMenu = styled(MdClose)`
   right: 1rem;
 
   cursor: pointer;
-`
+`;
 
 export const ContainerUserLogged = styled.div`
 min-width: 300px;
@@ -57,14 +59,14 @@ min-width: 300px;
 
     max-width: 175px;
   }
-`
+`;
 
 export const NavContainer = styled.ul`
   min-width: 300px;
 
   width: 100%;
   overflow: hidden;
-`
+`;
 
 export const ItemNav = styled.li`
   height: 85px;
@@ -95,4 +97,4 @@ export const ItemNav = styled.li`
 
     color: ${theme.colors.primary.white};
   }
-`
+`;

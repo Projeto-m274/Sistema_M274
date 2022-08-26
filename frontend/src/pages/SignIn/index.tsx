@@ -11,12 +11,14 @@ import { UserContext } from '../../contexts/userContext';
 import { useToastr } from '../../hooks/useToastr';
 
 import * as C from './styles';
+import LoaderAnimation from '../../components/Animations/LoaderAnimation';
 
 const SignIn: React.FC = () => {
   const [mailValue, setMailValue] = useState<string>('');
   const [passwordValue, setPasswordValue] = useState<string>('');
   const [isSubmitForm, setIsSubmitForm] = useState<boolean>(false);
   const [invalidCredentials, setInvalidCredentials] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const history = useHistory();
   const { userLogin } = useContext(UserContext);
@@ -34,21 +36,28 @@ const SignIn: React.FC = () => {
   };
 
   const handleSignIn = useCallback(() => {
+    setIsLoading(true);
     setIsSubmitForm(true);
 
     if (!mailValue || mailValue === '' || !passwordValue || passwordValue === '') {
+      setIsLoading(false);
+
       useToastr('error', 'Credenciais Incorretas!', 'top-right');
 
       setInvalidCredentials(true);
 
       return;
     } else {
+      
       userLogin(mailValue, passwordValue);
-
+      
       const userIsLoggedIn = localStorage.getItem("@UserLogged") === "true";
-
+      
       if (userIsLoggedIn) {
-        history.push('/follow-up');
+        setTimeout(() => {
+          setIsLoading(false);
+          history.push('/follow-up');
+        }, 2000);
       }
     }
   }, [mailValue, passwordValue]);
@@ -86,7 +95,11 @@ const SignIn: React.FC = () => {
           />
         </C.ColumnStart>
 
-        <Button text='Entrar' onClick={handleSignIn} />
+        <Button 
+          text='Entrar' 
+          isLoading={isLoading} 
+          onClick={handleSignIn} 
+        />
       </C.Container>
     </Fragment>
   );
