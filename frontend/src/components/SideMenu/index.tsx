@@ -53,7 +53,7 @@ const SideMenu: React.FC = () => {
       </C.ContainerUserLogged>
 
       <C.NavContainer>
-        <C.ItemNav className="home">
+        <C.ItemNav className="home" onClick={() => handleToRoute("/follow-up")}>
           <MdHome size={28} color="#fff" />
           <span>Inicio</span>
         </C.ItemNav>

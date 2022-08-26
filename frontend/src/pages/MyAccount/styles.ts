@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import theme from "../../theme/theme";
 
+interface MyAccountStyledProps {
+  isFirstTitle?: boolean;
+}
+
 export const Box = styled.div`
   display: flex;
   align-items: center;
@@ -20,15 +24,23 @@ export const Box = styled.div`
   transition: .2s;
 
   &:hover {
-    opacity: .8;
+    opacity: .9;
     cursor: pointer;
   }
 `;
 
+export const SuperTitle = styled.h1`
+  margin-top: 50px;
+`;
+
 export const Title = styled.h3`
   color: #fff;
+
+  margin-left: ${(props: MyAccountStyledProps) => !props.isFirstTitle && 90}px;
 `;
 
 export const Text = styled.p`
   color: #fff;
+
+  font-size: 20px;
 `;

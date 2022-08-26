@@ -1,8 +1,11 @@
 import React, { memo, useContext } from "react";
+
 import Flexbox from "../../components/CssLayouts/Flexbox";
 import Header from "../../components/Header";
+
 import { UserContext } from "../../contexts/userContext";
-import { Title, Text, Box } from "./styles";
+
+import { Title, Text, Box, SuperTitle } from "./styles";
 
 const MyAccount: React.FC = () => {
   const { userData } = useContext(UserContext);
@@ -10,9 +13,14 @@ const MyAccount: React.FC = () => {
   return (
     <div>
       <Header isAuthenticated />
+
+      <Flexbox>
+        <SuperTitle>Seus Dados</SuperTitle>
+      </Flexbox>
+
       <Box>
-        <Flexbox flex={1} gap={10}>
-          <Title>Nome:</Title>
+        <Flexbox justifyContent="center" flex={1} gap={10}>
+          <Title isFirstTitle>Nome:</Title>
           <Text>{userData?.usuario?.nome}</Text>
 
           <Title>Email:</Title>
