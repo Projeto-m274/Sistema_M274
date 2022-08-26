@@ -1,6 +1,7 @@
 import React, {
   Fragment,
   memo,
+  useContext,
   useState,
 } from "react";
 
@@ -12,11 +13,14 @@ import Input from "../../components/Form/Input";
 import Button from "../../components/Button";
 import Toastr from "../../components/Toastr";
 
+import { UserContext } from "../../contexts/userContext";
+
 import { useToastr } from "../../hooks/useToastr";
 
 import { ToastrDefaultProps } from "../../constants/toastrDefaultProps";
 
 import { Title } from "./styles";
+import api from "../../services/api";
 
 const Register: React.FC = () => {
   const [inputNameValue, setInputNameValue] = useState<string>("");
@@ -24,11 +28,10 @@ const Register: React.FC = () => {
   const [inputEmailValue, setInputEmailValue] = useState<string>("");
   const [inputPasswordValue, setInputPasswordValue] = useState<string>("");
   const [inputConfirmPasswordValue, setInputConfirmPasswordValue] = useState<string>("");
-  const [invalidConfirmPasswordField, setInvalidConfirmPasswordField] = useState<boolean>(false);
-  const [invalidFormFields, setInvalidFormFields] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const history = useHistory();
+  const { createUser, userCreated } = useContext(UserContext);
 
   const handleChangeInputNameValue = (name: string) => {
     setInputNameValue(name);
@@ -72,23 +75,43 @@ const Register: React.FC = () => {
       localStorage.setItem("passwordsNotMatch", "true");
       return;
     } else {
-      localStorage.setItem("invalidRegisterForm", "true");
+      localStorage.setItem("invalidRegisterForm", "false");
+      localStorage.setItem("passwordsNotMatch", "false");
     }
   }
 
-  const handleSubmitForm = () => {
+  const hasInvalidFormFields = localStorage.getItem("invalidRegisterForm") === "true";
+  const hasPasswordsNotMatch = localStorage.getItem("passwordsNotMatch") === "true";
+
+  const handleSubmitForm = async () => {
     setIsLoading(true);
 
     formValidator();
 
-    if (localStorage.getItem("invalidRegisterForm") !== "true" && localStorage.getItem("passwordsNotMatch") !== "true") {
-      setTimeout(() => {
-        localStorage.setItem("@registerSuccessful", "true");
-        
-        history.push("/follow-up");
+    if (!hasInvalidFormFields && !hasPasswordsNotMatch) {
+      createUser({
+        nome: inputNameValue,
+        userName: inputUsernameValue,
+        email: inputEmailValue,
+        password: inputPasswordValue,
+        perfilId: 0,
+      });
 
-        setIsLoading(false);
-      }, 2000);
+      if (userCreated) {
+        setTimeout(() => {
+          localStorage.setItem("@registerSuccessful", "true");
+
+          history.push("/follow-up");
+
+          setIsLoading(false);
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          localStorage.setItem("@registerSuccessful", "false");
+
+          setIsLoading(false);
+        }, 2000);
+      }
     }
 
     setTimeout(() => {
@@ -118,7 +141,7 @@ const Register: React.FC = () => {
             placeholder="Digite aqui o seu nome completo"
             onChange={event => handleChangeInputNameValue(event.target.value)}
             required
-            hasError={localStorage.getItem("invalidRegisterForm") === "true"}
+            hasError={hasInvalidFormFields}
             fullWidth
           />
 
@@ -129,7 +152,7 @@ const Register: React.FC = () => {
             placeholder="Digite aqui o seu nome de usuário"
             onChange={event => handleChangeInputUsernameValue(event.target.value)}
             required
-            hasError={localStorage.getItem("invalidRegisterForm") === "true"}
+            hasError={hasInvalidFormFields}
             fullWidth
           />
 
@@ -140,7 +163,7 @@ const Register: React.FC = () => {
             placeholder="Digite aqui o seu melhor e-mail"
             onChange={event => handleChangeInputEmailValue(event.target.value)}
             required
-            hasError={localStorage.getItem("invalidRegisterForm") === "true"}
+            hasError={hasInvalidFormFields}
             fullWidth
           />
 
@@ -151,7 +174,7 @@ const Register: React.FC = () => {
             placeholder="Digite aqui a sua senha"
             onChange={event => handleChangeInputPasswordValue(event.target.value)}
             required
-            hasError={localStorage.getItem("invalidRegisterForm") === "true" || localStorage.getItem("passwordsNotMatch") === "true"}
+            hasError={hasInvalidFormFields || hasPasswordsNotMatch}
             fullWidth
           />
 
@@ -162,7 +185,7 @@ const Register: React.FC = () => {
             placeholder="Confirme aqui a senha digitada acima"
             onChange={event => handleChangeInputConfirmPasswordValue(event.target.value)}
             required
-            hasError={localStorage.getItem("invalidRegisterForm") === "true" || localStorage.getItem("passwordsNotMatch") === "true"}
+            hasError={hasInvalidFormFields || hasPasswordsNotMatch}
             fullWidth
           />
 

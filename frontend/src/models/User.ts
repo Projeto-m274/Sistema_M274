@@ -13,4 +13,12 @@ export interface IUserResponse {
     nome: string;
     userName: string;
   };
+};
+
+export interface IUserRegister {
+  email: string;
+  nome: string;
+  userName: string;
+  password: string;
+  perfilId: number;
 }

@@ -1,9 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import Checkbox from "../../components/Checkbox";
 import CustomTable from "../../components/CustomTable";
 import Dropdown, { IOptions } from "../../components/Dropdown";
 import { Row } from "../../components/Dropdown/styles";
 import Header from "../../components/Header";
+import { UserContext } from "../../contexts/userContext";
 import { columns, data, options } from "./tableData.mock";
 
 const FollowUp: React.FC = () => {
@@ -16,6 +17,12 @@ const FollowUp: React.FC = () => {
     defaultValue: "CLIENTES",
     value: "CLIENTE 1",
   };
+
+  const { userData } = useContext(UserContext);
+
+  useEffect(() => {
+    localStorage.setItem("@token", userData ? userData.token : "");
+  }, []);
 
   return (
     <Fragment>

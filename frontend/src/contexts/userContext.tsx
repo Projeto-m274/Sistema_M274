@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
 
 import { IReactComponent } from "../models/ReactComponent";
-import { IUser, IUserResponse } from "../models/User";
+import { IUser, IUserRegister, IUserResponse } from "../models/User";
 
 import api from "../services/api";
 
@@ -11,7 +11,7 @@ interface IUserContextData {
   userData: IUserResponse | undefined;
   userLogin: (username: string, password: string) => void;
   userLogout: () => void;
-  createUser: (userData: IUser) => void;
+  createUser: (userData: IUserRegister) => void;
   userCreated: boolean;
 };
 
@@ -41,13 +41,13 @@ export const UserProvider: React.FC<IReactComponent> = ({ children }) => {
     localStorage.removeItem("@UserLogged");
   }
 
-  const createUser = async (userData: IUser) => {
-    const createUserRequestParameter: IUser = {
-      name: userData?.name,
-      username: userData?.username,
-      email: userData?.email,
-      password: userData?.password,
-      profileId: userData?.profileId,
+  const createUser = async (userData: IUserRegister) => {
+    const createUserRequestParameter: IUserRegister = {
+      nome: userData.nome,
+      userName: userData.userName,
+      email: userData.email,
+      password: userData.password,
+      perfilId: userData.perfilId,
     };
 
     await api.post("/Usuario", createUserRequestParameter).then(() => {

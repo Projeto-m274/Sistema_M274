@@ -4,14 +4,12 @@ import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 import Input from '../../components/Form/Input';
-import Toastr from '../../components/Toastr';
 
 import { UserContext } from '../../contexts/userContext';
 
 import { useToastr } from '../../hooks/useToastr';
 
 import * as C from './styles';
-import LoaderAnimation from '../../components/Animations/LoaderAnimation';
 
 const SignIn: React.FC = () => {
   const [mailValue, setMailValue] = useState<string>('');
@@ -21,7 +19,7 @@ const SignIn: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const history = useHistory();
-  const { userLogin } = useContext(UserContext);
+  const { userLogin, userData } = useContext(UserContext);
 
   useEffect(() => {
     setIsSubmitForm(false);
@@ -56,6 +54,7 @@ const SignIn: React.FC = () => {
       if (userIsLoggedIn) {
         setTimeout(() => {
           setIsLoading(false);
+          localStorage.setItem("@token", userData ? userData.token : "");
           history.push('/follow-up');
         }, 2000);
       }
