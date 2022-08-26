@@ -7,15 +7,40 @@ import FollowUp from "../pages/FollowUp";
 import Imovel from "../pages/Imovel";
 import Register from "../pages/Register";
 import MyAccount from "../pages/MyAccount";
+import AuthenticatedRoute from "./AuthenticatedRoute";
 
 const Router: React.FC = () => {
   return (
     <Switch>
-      <Route path="/" exact component={SignIn} />
-      <Route path="/my-account" component={MyAccount} />
-      <Route path="/follow-up" component={FollowUp} />
-      <Route path="/imovel" component={Imovel} />
-      <Route path="/register" component={Register} />
+      <AuthenticatedRoute 
+        path="/" 
+        exact 
+        component={SignIn} 
+      />
+
+      <AuthenticatedRoute 
+        path="/my-account" 
+        component={MyAccount} 
+        isPrivate
+      />
+
+      <AuthenticatedRoute 
+        path="/follow-up" 
+        component={FollowUp} 
+        isPrivate
+      />
+
+      <AuthenticatedRoute 
+        path="/imovel" 
+        component={Imovel} 
+        isPrivate
+      />
+
+      <AuthenticatedRoute 
+        path="/register" 
+        component={Register} 
+        isPrivate
+      />
     </Switch>
   );
 };
