@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import MaterialTable from '@material-table/core';
 import { ExportCsv, ExportPdf } from '@material-table/exporters';
 
-import { ICustomTableProps } from '../../models/ICustomTable';
+import { ICustomTableProps } from '../../models/CustomTable';
 import Checkbox from '../Checkbox';
 
 const CustomTable: React.FC<ICustomTableProps> = ({

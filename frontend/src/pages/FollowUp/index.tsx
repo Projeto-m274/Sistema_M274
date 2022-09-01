@@ -9,11 +9,13 @@ import { columns, data, options } from "./tableData.mock";
 
 const FollowUp: React.FC = () => {
   const unitOptions: IOptions = {
+    id: 1,
     defaultValue: "UNIDADES",
     value: "UNIDADE 1",
   };
 
   const clientOptions: IOptions = {
+    id: 2,
     defaultValue: "CLIENTES",
     value: "CLIENTE 1",
   };

@@ -29,10 +29,12 @@ export const UserProvider: React.FC<IReactComponent> = ({ children }) => {
 
     await api.post("/Account/login", loginUserRequestParameter)
       .then((response: AxiosResponse<IUserResponse>) => {
+        localStorage.setItem("@token", response?.data?.token);
         localStorage.setItem("@UserLogged", "true");
         setUserData(response?.data)
       }).catch((error: AxiosError) => {
         console.error(error);
+        alert('Usuario ou senha invalidos! Tente novamente!')
         localStorage.setItem("@UserLogged", "false");
       });
   };
@@ -52,9 +54,11 @@ export const UserProvider: React.FC<IReactComponent> = ({ children }) => {
 
     await api.post("/Usuario", createUserRequestParameter).then(() => {
       setUserCreated(true);
+      localStorage.setItem("@registerSuccessful", "true");
     }).catch((error: AxiosError) => {
       console.error(error);
       setUserCreated(false);
+      localStorage.setItem("@registerSuccessful", "true");
     });
   }
 

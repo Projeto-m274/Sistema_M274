@@ -1,4 +1,4 @@
-import { ICustomTableColumns, ICustomTableOptions } from "../../models/ICustomTable";
+import { ICustomTableColumns, ICustomTableOptions } from "../../models/CustomTable";
 
 export const columns: ICustomTableColumns[] = [
  { title: "DT. TAREFA", field: 'dtTarefa'  }, 

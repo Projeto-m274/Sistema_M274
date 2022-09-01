@@ -94,15 +94,16 @@ const Register: React.FC = () => {
         userName: inputUsernameValue,
         email: inputEmailValue,
         password: inputPasswordValue,
-        perfilId: 0,
+        perfilId: 1,
       });
+      
+      const registerSuccessful = localStorage.getItem("@registerSuccessful") === "true";
 
-      if (userCreated) {
+      if (userCreated || registerSuccessful) {
+        localStorage.setItem("@registerSuccessful", "true");
+        history.push("/follow-up");
+        
         setTimeout(() => {
-          localStorage.setItem("@registerSuccessful", "true");
-
-          history.push("/follow-up");
-
           setIsLoading(false);
         }, 2000);
       } else {

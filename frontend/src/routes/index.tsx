@@ -7,43 +7,44 @@ import FollowUp from "../pages/FollowUp";
 import Imovel from "../pages/Imovel";
 import Register from "../pages/Register";
 import MyAccount from "../pages/MyAccount";
-import AuthenticatedRoute from "./AuthenticatedRoute";
 import NotFound from "../pages/NotFound";
+import Ocurrences from "../pages/Ocurrences";
 
 const Router: React.FC = () => {
   return (
     <Switch>
-      <AuthenticatedRoute 
+      <Route 
         path="/" 
         exact 
         component={SignIn} 
       />
 
-      <AuthenticatedRoute 
+      <Route 
         path="/my-account" 
         component={MyAccount} 
-        isPrivate
       />
 
-      <AuthenticatedRoute 
+      <Route 
         path="/follow-up" 
         component={FollowUp} 
-        isPrivate
       />
 
-      <AuthenticatedRoute 
+      <Route 
         path="/imovel" 
         component={Imovel} 
-        isPrivate
       />
 
-      <AuthenticatedRoute 
+      <Route 
         path="/register" 
         component={Register} 
-        isPrivate
       />
 
-      <AuthenticatedRoute 
+      <Route 
+        path="/ocurrences"
+        component={Ocurrences}
+      />
+
+      <Route 
         path="/404"
         component={NotFound}
       />

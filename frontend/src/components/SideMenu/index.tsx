@@ -69,7 +69,7 @@ const SideMenu: React.FC = () => {
           <MdArrowCircleUp size={28} color="#fff" />
           <span>Follow up</span>
         </C.ItemNav>
-        <C.ItemNav className="occurrence" onClick={() => handleToRoute("/404")}>
+        <C.ItemNav className="occurrence" onClick={() => handleToRoute("/ocurrences")}>
           <MdError size={28} color="#fff" />
           <span>Ocorrências</span>
         </C.ItemNav>

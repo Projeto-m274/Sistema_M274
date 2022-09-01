@@ -46,7 +46,6 @@ const SignIn: React.FC = () => {
 
       return;
     } else {
-      
       userLogin(mailValue, passwordValue);
       
       const userIsLoggedIn = localStorage.getItem("@UserLogged") === "true";
@@ -55,9 +54,12 @@ const SignIn: React.FC = () => {
         setTimeout(() => {
           setIsLoading(false);
           localStorage.setItem("@token", userData ? userData.token : "");
-          history.push('/follow-up');
         }, 2000);
       }
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000)
     }
   }, [mailValue, passwordValue]);
 

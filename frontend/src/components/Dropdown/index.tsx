@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Select } from './styles';
 
 export interface IOptions {
+  id: number;
   defaultValue: string;
   value: string;
 };
@@ -13,19 +14,19 @@ type TSelectProps = {
   options: IOptions[];
 }
 
-const Dropdown: React.FC<TSelectProps> = ({ 
-  isLeftSpacing, 
-  options, 
-  isTopSpacing, 
+const Dropdown: React.FC<TSelectProps> = ({
+  isLeftSpacing,
+  options,
+  isTopSpacing,
 }) => {
   return (
     <Container>
       <Select isTopSpacing={isTopSpacing} isLeftSpacing={isLeftSpacing}>
-        {options.map((option: IOptions) => (
-          <div key={option?.value}>
-            <option>{option.defaultValue}</option>
+        {options.map(option => (
+          <>
+            <option key={option.id}></option>
             <option>{option.value}</option>
-          </div>
+          </>
         ))}
       </Select>
     </Container>
