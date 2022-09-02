@@ -17,6 +17,8 @@ export const Container = styled.input<IInputStyledProps>`
   border-radius: 8px;
 
   background-color: ${theme.colors.secondary.gray};
+
+  cursor: pointer;
 `;
 
 export const InputLabel = styled.p`

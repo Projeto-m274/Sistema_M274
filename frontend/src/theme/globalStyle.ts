@@ -16,4 +16,8 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: 400;
         font-size: 1rem;
     }
+
+    input[type="checkbox"] {
+        filter: sepia(6%) brightness(90%) hue-rotate(170deg) saturate(68%) contrast(312%);
+    }
 `;

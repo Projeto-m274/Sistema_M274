@@ -9,44 +9,61 @@ import Register from "../pages/Register";
 import MyAccount from "../pages/MyAccount";
 import NotFound from "../pages/NotFound";
 import Ocurrences from "../pages/Ocurrences";
+import RegisterOcurrence from "../pages/Ocurrences/RegisterOcurrence";
+import OcurrencesList from "../pages/Ocurrences/OcurrencesList";
 
 const Router: React.FC = () => {
   return (
     <Switch>
-      <Route 
-        path="/" 
-        exact 
-        component={SignIn} 
+      <Route
+        path="/"
+        exact
+        component={SignIn}
       />
 
-      <Route 
-        path="/my-account" 
-        component={MyAccount} 
+      <Route
+        path="/my-account"
+        component={MyAccount}
       />
 
-      <Route 
-        path="/follow-up" 
-        component={FollowUp} 
+      <Route
+        path="/follow-up"
+        component={FollowUp}
       />
 
-      <Route 
-        path="/imovel" 
-        component={Imovel} 
+      <Route
+        path="/imovel"
+        component={Imovel}
       />
 
-      <Route 
-        path="/register" 
-        component={Register} 
+      <Route
+        path="/register"
+        component={Register}
       />
 
-      <Route 
+      <Route
         path="/ocurrences"
         component={Ocurrences}
       />
 
-      <Route 
+      <Route
+        path="/ocurrences-list"
+        component={OcurrencesList}
+      />
+
+      <Route
+        path="/register-ocurrence"
+        component={RegisterOcurrence}
+      />
+
+      <Route
         path="/404"
         component={NotFound}
+      />
+
+      <Route 
+        path="*"
+        component={NotFound} 
       />
     </Switch>
   );

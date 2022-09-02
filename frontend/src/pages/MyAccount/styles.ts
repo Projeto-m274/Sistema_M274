@@ -31,6 +31,8 @@ export const Box = styled.div`
 
 export const SuperTitle = styled.h1`
   margin-top: 50px;
+
+  color: ${theme.colors.primary.orange}
 `;
 
 export const Title = styled.h3`

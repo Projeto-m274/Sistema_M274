@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from '../../theme/theme';
+import theme from '../../../theme/theme';
 
 export const Title = styled.h1`
   margin-top: 4rem;

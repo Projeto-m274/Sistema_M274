@@ -11,20 +11,29 @@ export interface IOptions {
 type TSelectProps = {
   isLeftSpacing?: number;
   isTopSpacing?: number;
+  fullWidth?: boolean;
+  customBorderColor?: string;
   options: IOptions[];
 }
 
 const Dropdown: React.FC<TSelectProps> = ({
   isLeftSpacing,
-  options,
   isTopSpacing,
+  fullWidth,
+  customBorderColor,
+  options,
 }) => {
   return (
     <Container>
-      <Select isTopSpacing={isTopSpacing} isLeftSpacing={isLeftSpacing}>
+      <Select 
+        isTopSpacing={isTopSpacing} 
+        isLeftSpacing={isLeftSpacing}
+        fullWidth={fullWidth}
+        customBorderColor={customBorderColor}
+      >
         {options.map(option => (
           <>
-            <option key={option.id}></option>
+            <option key={option.id}>{option.defaultValue}</option>
             <option>{option.value}</option>
           </>
         ))}

@@ -1,62 +1,48 @@
-import React, { memo, useState } from "react";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import Header from "../../components/Header";
-import Flexbox from "../../components/CssLayouts/Flexbox";
-import Input from "../../components/Form/Input";
-import Dropdown, { IOptions } from "../../components/Dropdown";
+import Button from '../../components/Button';
+import Flexbox from '../../components/CssLayouts/Flexbox';
+import Header from '../../components/Header';
 
-import { Title } from "./styles";
+import { Title } from './styles';
 
 const Ocurrences: React.FC = () => {
-  const [contractValue, setContractValue] = useState<string>("");
-  const [unitySelectedValue, setUnitySelectedValue] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleChangeInputContractValue = (value: string) => {
-    setContractValue(value);
+  const history = useHistory();
+
+  const handleGoToOcurrencesList = () => {
+    history.push("/ocurrences-list");
   };
 
-  const handleChangeInputUnitySelectedValue = (value: string) => {
-    setUnitySelectedValue(value);
-  };
-
-  const unitOptions: IOptions = {
-    id: 0,
-    defaultValue: "UNIDADES",
-    value: "UNIDADE 1",
+  const handleGoToRegisterOcurrence = () => {
+    history.push("/register-ocurrence");
   };
 
   return (
     <>
       <Header isAuthenticated />
+
       <Flexbox flexDirection="column">
-        <Title>Cadastrar uma Ocorrencia</Title>
+        <Title>O que deseja ver de ocorrencias?</Title>
 
-        <Input 
-          label="Contrato"
-          type="number"
-          placeholder="Informe o numero do contrato"
-          required
-          fullWidth
-          value={contractValue}
-          onChange={(event) => handleChangeInputContractValue(event.target.value)}
-        />
+        <Flexbox gap={80}>
+          <Button
+            text="Lista de ocorrencias"
+            isLoading={isLoading}
+            onClick={handleGoToOcurrencesList}
+          />
 
-        <Dropdown 
-          options={[unitOptions]}
-        />
-
-        <Input 
-          label="Unidade"
-          type="text"
-          placeholder="Selecione a unidade"
-          required
-          fullWidth
-          value={unitySelectedValue}
-          onChange={(event) => handleChangeInputUnitySelectedValue(event.target.value)}
-        />
+          <Button
+            text="Registro de ocorrencia"
+            isLoading={isLoading}
+            onClick={handleGoToRegisterOcurrence}
+          />
+        </Flexbox>
       </Flexbox>
     </>
   );
-};
+}
 
-export default memo(Ocurrences);
+export default Ocurrences;

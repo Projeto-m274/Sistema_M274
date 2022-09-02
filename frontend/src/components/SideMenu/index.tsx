@@ -73,7 +73,7 @@ const SideMenu: React.FC = () => {
           <MdError size={28} color="#fff" />
           <span>Ocorrências</span>
         </C.ItemNav>
-        <C.ItemNav className="immobile">
+        <C.ItemNav className="immobile" onClick={() => handleToRoute("/imobile")}>
           <MdHouse size={28} color="#fff" />
           <span>Imóveis</span>
         </C.ItemNav>

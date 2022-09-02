@@ -55,6 +55,8 @@ const SignIn: React.FC = () => {
           setIsLoading(false);
           localStorage.setItem("@token", userData ? userData.token : "");
         }, 2000);
+
+        history.push("/follow-up");
       }
 
       setTimeout(() => {
