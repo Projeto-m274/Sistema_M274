@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
 
 import { IReactComponent } from "../models/ReactComponent";
-import { IUser, IUserRegister, IUserResponse } from "../models/User";
+import { IUserRegister, IUserResponse } from "../models/User";
 
 import api from "../services/api";
 
@@ -33,9 +33,8 @@ export const UserProvider: React.FC<IReactComponent> = ({ children }) => {
         localStorage.setItem("@UserLogged", "true");
         setUserData(response?.data)
       }).catch((error: AxiosError) => {
-        console.error(error);
-        alert('Usuario ou senha invalidos! Tente novamente!')
         localStorage.setItem("@UserLogged", "false");
+        console.error(error);
       });
   };
 
