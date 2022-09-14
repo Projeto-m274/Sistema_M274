@@ -17,9 +17,6 @@ const Imovel: React.FC = () => {
     return {
       field: column.field,
       title: column.title,
-      render: (rowData: any) => {
-        return <Checkbox/>
-      }
     }
   })
 
@@ -51,7 +48,7 @@ const Imovel: React.FC = () => {
             title="Imovel"
             columns={multableColumn}
             data={data}
-            options={options}
+            options={options }
           />
         </Column>
       </Container>

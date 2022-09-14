@@ -49,4 +49,5 @@ export const data: Array<Object> = [
 export const options: ICustomTableOptions = {
   exportData: true,
   exportFileName: 'FollowUp',
+  
 }
